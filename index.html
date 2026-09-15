@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Balaji Sriramareddy | Data Analyst Portfolio</title>
+<meta name="description" content="Bala, Commercial Intelligence Analyst. SQL, Power BI and Excel case studies on suppliers, stock and warehouse performance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground: #F2F5F1;
+    --surface: #FBFCFA;
+    --ink: #14201B;
+    --muted: #56665E;
+    --rule: #D3DCD5;
+    --accent: #0B6E4F;
+    --accent-soft: #DCEDE4;
+    --amber: #9A6408;
+    --amber-soft: #F6E8C8;
+    --display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+    --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --s-xs: .75rem; --s-sm: .875rem; --s-md: 1rem; --s-lg: 1.25rem; --s-xl: 1.75rem;
+    --s-2xl: clamp(2.4rem, 6.2vw, 4.4rem);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0E1512; --surface: #151F1A; --ink: #E3EBE5; --muted: #95A69C;
+      --rule: #2A3831; --accent: #45C495; --accent-soft: #173327;
+      --amber: #E4AE45; --amber-soft: #33280F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0E1512; --surface: #151F1A; --ink: #E3EBE5; --muted: #95A69C;
+    --rule: #2A3831; --accent: #45C495; --accent-soft: #173327;
+    --amber: #E4AE45; --amber-soft: #33280F;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  [hidden] { display: none !important; }
+  img { max-width: 100%; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  body {
+    background: var(--ground); color: var(--ink);
+    font: 400 var(--s-md)/1.6 var(--body);
+    padding-inline: 20px;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .wrap { max-width: 1080px; margin-inline: auto; }
+  .label { font: 500 var(--s-xs)/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+
+  /* Header */
+  .top {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+    background: color-mix(in srgb, var(--ground) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+    margin-inline: -20px; padding-inline: 20px;
+  }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+  .brand { font: 800 var(--s-lg)/1 var(--display); font-stretch: 75%; letter-spacing: .02em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+  .brand span { color: var(--accent); }
+  .top nav { display: flex; gap: 20px; flex-wrap: wrap; }
+  .top nav a { color: var(--muted); text-decoration: none; font-size: var(--s-sm); font-weight: 500; }
+  .top nav a:hover { color: var(--ink); }
+
+  section { padding-block: 56px; }
+  section + section { border-top: 1px solid var(--rule); }
+  .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+  .sec-head h2 { font-size: var(--s-xl); font-weight: 700; font-stretch: 85%; }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 1.45fr 1fr; gap: 48px; align-items: end; padding-block: 64px 56px; }
+  .hero h1 { font-size: var(--s-2xl); line-height: .98; font-weight: 800; font-stretch: 68%; text-transform: uppercase; letter-spacing: -.005em; margin-block: 14px 22px; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p.lede { max-width: 56ch; color: var(--muted); font-size: 1.075rem; margin: 0 0 28px; }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px;
+    font: 600 var(--s-sm)/1 var(--body); text-decoration: none; border-radius: 3px;
+    border: 1.5px solid var(--ink); color: var(--ink); background: transparent; cursor: pointer;
+    transition: background .15s, color .15s;
+  }
+  .btn.primary { background: var(--ink); color: var(--ground); }
+  .btn:hover { background: var(--accent); border-color: var(--accent); color: var(--ground); }
+
+  .ledger { border-top: 2px solid var(--ink); }
+  .ledger .row { display: grid; grid-template-columns: 7.5rem 1fr; gap: 12px; padding-block: 11px; border-bottom: 1px solid var(--rule); font-size: var(--s-sm); }
+  .ledger .row dd { margin: 0; }
+  .ledger .row dt { padding-top: 2px; }
+  .open { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--accent); }
+  .open::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+
+  /* Project ticket */
+  .ticket {
+    display: grid; grid-template-columns: 1.5fr 1fr; background: var(--surface);
+    border: 1.5px solid var(--ink); border-radius: 4px; color: inherit; text-decoration: none;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .ticket:hover { transform: translateY(-2px); box-shadow: 6px 6px 0 var(--accent-soft); }
+  .ticket .main { padding: 26px 28px; display: grid; gap: 14px; align-content: start; }
+  .ticket .side { padding: 26px 28px; border-left: 1.5px dashed var(--rule); display: grid; gap: 18px; align-content: start; }
+  .ticket-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .code { font: 500 var(--s-sm)/1 var(--mono); letter-spacing: .06em; }
+  .barcode { height: 22px; width: 92px; background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px, transparent 5px 8px, var(--ink) 8px 11px, transparent 11px 12px); opacity: .85; }
+  .ticket h3 { font-size: 1.6rem; font-weight: 700; font-stretch: 80%; line-height: 1.1; }
+  .ticket p { margin: 0; color: var(--muted); max-width: 60ch; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 9px; border-radius: 2px; font: 500 var(--s-xs)/1.2 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+  .chip.wip { background: var(--amber-soft); color: var(--amber); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font: 500 var(--s-xs)/1 var(--mono); padding: 5px 8px; border: 1px solid var(--rule); border-radius: 2px; color: var(--ink); }
+  .tables { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 16px; font: 400 var(--s-sm)/1.9 var(--mono); }
+  .tables li::before { content: "▸ "; color: var(--accent); }
+  .grid-tickets { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 20px; }
+  .grid-tickets .ticket { grid-template-columns: 1fr; }
+  .chip.live { background: var(--accent-soft); color: var(--accent); }
+  .finding { font: 500 var(--s-sm)/1.45 var(--mono); color: var(--ink); border-left: 2px solid var(--accent); padding-left: 10px; }
+  .sub-head { margin: 36px 0 14px; }
+  .case-body blockquote { margin: 0 0 16px; padding-left: 14px; border-left: 2px solid var(--accent); color: var(--muted); }
+  .more { font-weight: 600; font-size: var(--s-sm); color: var(--accent); }
+
+  /* Skills ledger table */
+  .table-scroll { overflow-x: auto; }
+  table.skills { width: 100%; border-collapse: collapse; min-width: 560px; }
+  .skills th { text-align: left; padding: 0 16px 10px 0; border-bottom: 2px solid var(--ink); }
+  .skills td { padding: 16px 16px 16px 0; border-bottom: 1px solid var(--rule); vertical-align: top; font-size: var(--s-sm); }
+  .skills td:first-child { font: 700 1.05rem/1.3 var(--display); font-stretch: 85%; width: 26%; }
+  .skills td:first-child small { display: block; font: 400 var(--s-xs)/1.5 var(--mono); color: var(--muted); margin-top: 3px; }
+  .skills td:last-child { color: var(--muted); width: 28%; }
+  .also { margin-top: 18px; font-size: var(--s-sm); color: var(--muted); }
+
+  /* About */
+  .about { display: grid; grid-template-columns: 1fr 1.6fr; gap: 48px; }
+  .about .prose p { margin: 0 0 16px; max-width: 64ch; }
+  .monogram {
+    aspect-ratio: 4 / 5; max-width: 260px; width: 100%; border: 1.5px solid var(--ink); border-radius: 4px;
+    display: grid; place-items: center; background: var(--accent-soft); position: relative; overflow: hidden;
+  }
+  .monogram img { width: 100%; height: 100%; object-fit: cover; }
+  .monogram b { font: 800 7rem/1 var(--display); font-stretch: 62%; color: var(--accent); }
+  .monogram .label { position: absolute; left: 12px; bottom: 10px; }
+
+  /* Contact */
+  .contact h2 { font-size: clamp(1.9rem, 4.5vw, 3rem); font-weight: 800; font-stretch: 70%; text-transform: uppercase; line-height: 1; max-width: 18ch; margin-bottom: 18px; }
+  .contact p { color: var(--muted); max-width: 56ch; margin: 0 0 24px; }
+  .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); column-gap: 32px; border-top: 2px solid var(--ink); }
+  .links a, .links span.todo { display: flex; justify-content: space-between; gap: 8px; padding: 14px 4px; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); font-weight: 500; }
+  .links a:hover { color: var(--accent); }
+  .links .label { align-self: center; }
+  .links span.todo { color: var(--muted); }
+  footer { padding-block: 28px 40px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  /* Case study */
+  .case { padding-block: 40px 64px; }
+  .back { background: none; border: 0; padding: 0; color: var(--accent); font: 600 var(--s-sm)/1 var(--body); cursor: pointer; }
+  .case-head { display: grid; gap: 14px; padding-block: 24px 28px; border-bottom: 2px solid var(--ink); }
+  .case-head h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; font-stretch: 70%; text-transform: uppercase; line-height: 1; }
+  .case-grid { display: grid; grid-template-columns: 1fr 17rem; gap: 48px; padding-top: 32px; }
+  .case-body { max-width: 68ch; }
+  .case-body h2 { font-size: var(--s-lg); font-stretch: 85%; margin: 28px 0 10px; }
+  .case-body h2:first-child { margin-top: 0; }
+  .case-body p, .case-body li { color: var(--ink); }
+  .case-body img { max-width: 100%; border: 1px solid var(--rule); border-radius: 3px; }
+  .case-body pre { overflow-x: auto; background: var(--surface); border: 1px solid var(--rule); padding: 14px; font: var(--s-sm)/1.5 var(--mono); }
+  .case-body code { font-family: var(--mono); font-size: .9em; }
+  .case-body table { border-collapse: collapse; display: block; overflow-x: auto; }
+  .case-body th, .case-body td { border-bottom: 1px solid var(--rule); padding: 6px 12px 6px 0; text-align: left; }
+  .case-side { display: grid; gap: 22px; align-content: start; }
+  .sprints { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; margin-top: 8px; }
+  .sprints i { height: 18px; border: 1px solid var(--rule); background: var(--surface); }
+  .sprints i.done { background: var(--accent); border-color: var(--accent); }
+  .src-note { font-size: var(--s-xs); color: var(--muted); }
+
+  @media (max-width: 800px) {
+    .grid-tickets { grid-template-columns: 1fr; }
+    .hero, .about, .case-grid { grid-template-columns: 1fr; gap: 32px; }
+    .ticket { grid-template-columns: 1fr; }
+    .ticket .side { border-left: 0; border-top: 1.5px dashed var(--rule); }
+    .monogram { max-width: 180px; }
+    .top nav { gap: 14px; }
+  }
+  @media (max-width: 600px) {
+    table.skills { min-width: 0; }
+    .skills thead { display: none; }
+    .skills tr { display: grid; gap: 4px; padding-block: 14px; border-bottom: 1px solid var(--rule); }
+    .skills td { display: block; padding: 0; border: 0; width: auto !important; }
+  }
+  @media (max-width: 460px) {
+    .top nav a.hide-sm { display: none; }
+    .ticket .main, .ticket .side { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" data-home>Bala<span>.</span></a>
+    <nav aria-label="Sections">
+      <a href="#projects" data-home>Projects</a>
+      <a href="#skills" data-home>Skills</a>
+      <a href="#about" data-home class="hide-sm">About</a>
+      <a href="#contact" data-home>Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="home">
+  <section class="hero" id="top">
+    <div>
+      <div class="label">Commercial Intelligence Analyst</div>
+      <h1>Commercial questions, answered in <em>SQL</em> and <em>Power&nbsp;BI</em>.</h1>
+      <p class="lede">I'm Balaji, or Bala. I work with inventory, customer and sales data to show where the numbers are wrong, where stock is stuck, and what a buyer or commercial lead should do next.</p>
+      <div class="actions">
+        <a class="btn primary" href="#projects">See the case studies</a>
+        <a class="btn" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <dl class="ledger" aria-label="At a glance">
+      <div class="row"><dt class="label">Status</dt><dd><span class="open">Open to analyst roles</span></dd></div>
+      <div class="row"><dt class="label">Targeting</dt><dd>Commercial Intelligence · Customer Insight · BI Developer</dd></div>
+      <div class="row"><dt class="label">Experience</dt><dd>1+ year in paid data work</dd></div>
+      <div class="row"><dt class="label">Core stack</dt><dd>SQL (PostgreSQL) · Power BI · Excel · Python</dd></div>
+      <div class="row"><dt class="label">Education</dt><dd>MSc Data Science, University of Hertfordshire</dd></div>
+      <div class="row"><dt class="label">Based in</dt><dd id="loc">London, UK</dd></div>
+    </dl>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head">
+      <h2>Case studies</h2>
+      <span class="label" id="proj-count"></span>
+    </div>
+    <div class="grid-tickets" id="project-list"></div>
+    <div class="sub-head label">Currently building</div>
+    <div id="wip-list"></div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head">
+      <h2>Toolkit</h2>
+      <span class="label">Tool / what I use it for / where to see it</span>
+    </div>
+    <div class="table-scroll">
+      <table class="skills">
+        <thead><tr><th class="label">Tool</th><th class="label">What I use it for</th><th class="label">Where to see it</th></tr></thead>
+        <tbody>
+          <tr><td>SQL<small>PostgreSQL · pgAdmin</small></td><td>Staging, quarantine and analytics tables; data-quality checks; category KPIs for stock and inventory value</td><td>INV-01 Zepto inventory analysis</td></tr>
+          <tr><td>Excel<small>PivotTables · calculated fields</small></td><td>Interactive KPI dashboards and deep-dive pivots on customer churn drivers</td><td>CHN-02 Databel churn dashboard</td></tr>
+          <tr><td>Power BI<small>Data modelling · dashboards</small></td><td>Interactive dashboards that answer revenue, loyalty and promotion questions</td><td>CUS-03 Customer behaviour analysis</td></tr>
+          <tr><td>Python<small>pandas · Jupyter</small></td><td>Data preparation, exploratory analysis, and automated profiling, cleaning and validation</td><td>CUS-03 · DQ-04</td></tr>
+          <tr><td>Explaining data<small>Teaching · content</small></td><td>Breaking Excel, SQL and Power BI down for complete beginners</td><td><a href="https://www.instagram.com/bala.explains/" target="_blank" rel="noopener">@bala.explains</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="also"><span class="label">Also working with</span>&nbsp; Git &amp; GitHub · Docker</p>
+  </section>
+
+  <section id="about">
+    <div class="about">
+      <div class="monogram" id="photo"><b>B</b><span class="label">Balaji Sriramareddy</span></div>
+      <div class="prose">
+        <div class="label" style="margin-bottom:12px">About</div>
+        <p>I'm a data analyst with an MSc in Data Science from the University of Hertfordshire, focused on the commercial side of the business: stock, customers, orders and the money that moves between them. I like starting from the question a manager is actually asking and working back to the query and the dashboard that answer it.</p>
+        <p>Alongside analysis I run <a href="https://www.instagram.com/bala.explains/" target="_blank" rel="noopener">@bala.explains</a>, where I teach Excel, SQL and Power BI to people starting from zero. Explaining a JOIN to a beginner in 30 seconds has made me much better at explaining a finding to a stakeholder in one slide.</p>
+        <p>I start with the data itself. In the Zepto analysis, the standard checks flagged 4 bad rows; a structural check found that more than half the dataset was duplicated. I'd rather catch that before a number reaches a dashboard. Every project here is on GitHub, including the SQL and the decisions behind it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="label" style="margin-bottom:12px">Contact</div>
+    <h2>Hiring for commercial or customer insight?</h2>
+    <p>I'm looking for Commercial Intelligence, Customer Insight and BI roles where analysis leads to a decision. The quickest way to reach me is LinkedIn or email at <a id="mail-inline" href="mailto:balaji.manjulamma@gmail.com">balaji.manjulamma@gmail.com</a>.</p>
+    <div class="links" id="links"></div>
+  </section>
+
+  <footer>
+    <span class="label">© <span id="yr"></span> Balaji Sriramareddy</span>
+    <span class="label">Hosted on GitHub Pages</span>
+  </footer>
+</main>
+
+<main class="wrap case" id="case" hidden>
+  <button class="back" type="button" id="back">← All case studies</button>
+  <div class="case-head">
+    <div class="ticket-top"><span class="code" id="c-code"></span><span class="chip wip" id="c-status"></span></div>
+    <h1 id="c-title"></h1>
+    <div class="tags" id="c-tags"></div>
+  </div>
+  <div class="case-grid">
+    <article class="case-body" id="c-body"></article>
+    <aside class="case-side">
+      <div><div class="label">Category</div><div id="c-cat"></div></div>
+      <div><div class="label" id="c-sprint-label"></div><div class="sprints" id="c-sprints"></div></div>
+      <div id="c-repo"></div>
+      <p class="src-note" id="c-src"></p>
+    </aside>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script>
+/* ============================================================
+   EDIT THESE TWO BLOCKS TO UPDATE YOUR SITE
+   ============================================================ */
+const SITE = {
+  githubUser: "BalajiSriramareddy",
+  linkedin: "https://www.linkedin.com/in/balaji-sriramareddy/",
+  email: "balaji.manjulamma@gmail.com",
+  photo: "",               // e.g. "images/profile.jpg" (leave "" to show the monogram)
+  instagram: "https://www.instagram.com/bala.explains/"
+};
+
+/* Each project: set `repo` to its GitHub repo name and the case-study page
+   shows that repo's README live. `body` is the fallback summary.
+   status "live" = published on GitHub, "wip" = currently building. */
+const PROJECTS = [
+  {
+    id: "zepto",
+    code: "INV-01",
+    title: "Zepto Inventory Analysis",
+    category: "Inventory · Commercial analytics",
+    status: "live",
+    summary: "SQL analysis of a 3,732-row quick-commerce inventory dataset: data-quality checks, category stock availability and inventory value, rebuilt on clean data.",
+    finding: "52% of the dataset was duplicated, inflating inventory value by up to 112%.",
+    tools: ["PostgreSQL", "pgAdmin"],
+    repo: "zepto-inventory-sql-analysis",
+    body: `
+      <h2>The business problem</h2>
+      <p>Find where stock availability and inventory value break down across product categories in Zepto's public inventory dataset, and make sure the numbers can be trusted first.</p>
+      <h2>What I found</h2>
+      <blockquote>The standard data-quality checks flagged 4 bad rows out of 3,732. A structural check flagged 1,931.</blockquote>
+      <ul>
+        <li>52% of the dataset was duplicated: five category blocks were identical copies under different labels.</li>
+        <li>Deduplicating took the data from 3,732 to 1,801 product records and 14 to 9 real categories.</li>
+        <li>Before the fix, total inventory value was overstated by 112%.</li>
+        <li>Biscuits has the highest out-of-stock rate at 28.6%, against a catalogue average of 12.0%.</li>
+        <li>Cooking Essentials holds 31.9% of inventory value. Only 4 high-value SKUs are unavailable.</li>
+      </ul>
+      <h2>How it's built</h2>
+      <p>PostgreSQL with a staging table, a quarantine table for rejects and a clean analytics table. All queries are in <code>zepto_inventory_analysis.sql</code>.</p>
+    `
+  },
+  {
+    id: "databel",
+    code: "CHN-02",
+    title: "Databel Customer Churn Analysis",
+    category: "Customer insight · Churn",
+    status: "live",
+    summary: "An interactive Excel dashboard on why telecom customers leave, with deep dives by churn reason, plan type, state, tenure and age.",
+    finding: "Competitors are the biggest churn category, and unlimited-plan customers churn more.",
+    tools: ["Excel", "PivotTables", "Calculated fields"],
+    repo: "databel-customer-churn-analysis",
+    body: `
+      <h2>The business problem</h2>
+      <p>Understand what drives customer churn at Databel, a telecom provider, with a particular focus on customers lost to competitors.</p>
+      <h2>What I found</h2>
+      <ul>
+        <li>Competitors are the highest-contributing churn category.</li>
+        <li>Customers on unlimited plans churn at a higher rate.</li>
+        <li>International-plan churn varies strongly by state.</li>
+        <li>Churn falls as account tenure grows, with differences by contract type.</li>
+      </ul>
+      <h2>How it's built</h2>
+      <p>An overview dashboard with total customers, churned customers and churn rate, backed by deep-dive PivotTables and engineered fields such as a churn flag, age groups and usage bands.</p>
+    `
+  },
+  {
+    id: "customer-behaviour",
+    code: "CUS-03",
+    title: "Customer Behaviour Analysis",
+    category: "Customer insight · End to end",
+    status: "live",
+    summary: "An end-to-end workflow on retail shopping data, from Python preparation through SQL business queries to a Power BI dashboard.",
+    finding: "Answers which categories drive revenue, which segments are most loyal, and how promotions change buying.",
+    tools: ["Python", "SQL", "Power BI"],
+    repo: "customer_behaviour_analysis",
+    body: `
+      <h2>The business problem</h2>
+      <p>Turn raw customer shopping data into business intelligence a commercial team could use.</p>
+      <h2>Questions answered</h2>
+      <ul>
+        <li>Which categories and items contribute the most revenue?</li>
+        <li>Which segments show higher loyalty and repeat purchases?</li>
+        <li>How does discount and promo usage influence purchase behaviour?</li>
+        <li>What are the common payment and shipping preferences?</li>
+      </ul>
+      <h2>How it's built</h2>
+      <p>Python (pandas) for preparation and exploratory analysis, SQL for the business queries, and a Power BI dashboard (<code>customer_behavior_dashboard.pbix</code>) for the results.</p>
+    `
+  },
+  {
+    id: "data-quality",
+    code: "DQ-04",
+    title: "Automated Data Cleaning & Validation System",
+    category: "Data quality · Automation",
+    status: "live",
+    summary: "A back-end “data gatekeeper” that profiles, cleans, validates and scores any dataset before it's used. Built during the CadetX virtual work experience.",
+    finding: "Four modules: profiling, cleaning, rule-based validation with anomaly detection, and pipeline orchestration.",
+    tools: ["Python", "Docker"],
+    repo: "CadetX-Automated-Data-Cleaning-And-Validation-System",
+    body: `
+      <h2>The business problem</h2>
+      <p>Unreliable data leads to faulty insights. This system checks a dataset before anyone builds on it.</p>
+      <h2>How it's built</h2>
+      <ul>
+        <li><strong>Profiling:</strong> characterises the dataset.</li>
+        <li><strong>Cleaning:</strong> imputation, deduplication and a quality score.</li>
+        <li><strong>Validation:</strong> rule-based checks plus anomaly detection.</li>
+        <li><strong>Pipeline:</strong> orchestrates the modules, with Docker support.</li>
+      </ul>
+      <p>Tested on synthetic UK rural fibre-broadband customer records.</p>
+    `
+  },
+  {
+    id: "warehouse",
+    code: "WH-05",
+    title: "Heavy Supplier, Inventory & Warehouse Analytics",
+    category: "Supply chain · Commercial analytics",
+    status: "wip",
+    summary: "An end-to-end analysis of a heavy-goods supplier business: which suppliers and products drive value, where inventory sits idle, and how each warehouse is performing.",
+    tools: ["PostgreSQL", "pgAdmin", "Power BI", "Jupyter"],
+    tables: ["suppliers", "products", "inventory", "warehouses", "customers", "orders", "invoices", "stock ledger"],
+    sprintsTotal: 12,
+    sprintsDone: null,   // set to a number (e.g. 3) as you publish each sprint
+    repo: "",            // add the repo name once it's on GitHub
+    body: `
+      <h2>The business problem</h2>
+      <p>A heavy-goods supplier holds stock across several warehouses and sells to trade customers. The data lives in separate operational files, so nobody has one view of supplier performance, stock health and sales together.</p>
+      <h2>The data</h2>
+      <p>12 CSV files covering suppliers, products, inventory, warehouses, customers, orders, invoices and the stock ledger, loaded into PostgreSQL and modelled for reporting.</p>
+      <h2>How it's being built</h2>
+      <p>12 weekly sprints, from data profiling and cleaning, through SQL modelling and KPI queries, to a Power BI dashboard and written recommendations.</p>
+      <h2>Findings</h2>
+      <p>This section fills in as the analysis sprints are completed.</p>
+    `
+  }
+];
+/* ============================================================ */
+
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const chip = (p) => p.status === "wip" ? `<span class="chip wip">In progress</span>` : `<span class="chip live">On GitHub</span>`;
+const tags = (p) => `<div class="tags">${p.tools.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div>`;
+
+function ticketMain(p) {
+  return `
+    <div class="main">
+      <div class="ticket-top"><span class="code">${esc(p.code)} · ${esc(p.category)}</span>${chip(p)}</div>
+      <h3>${esc(p.title)}</h3>
+      <p>${esc(p.summary)}</p>
+      ${p.finding ? `<div class="finding">${esc(p.finding)}</div>` : ""}
+      ${tags(p)}
+      <span class="more">Read the case study →</span>
+    </div>`;
+}
+
+function renderList() {
+  const live = PROJECTS.filter((p) => p.status !== "wip");
+  const wip = PROJECTS.filter((p) => p.status === "wip");
+  $("#proj-count").textContent = `${live.length} published · ${wip.length} in progress`;
+  $("#project-list").innerHTML = live.map((p) => `<a class="ticket" href="#/project/${p.id}">${ticketMain(p)}</a>`).join("");
+  $("#wip-list").innerHTML = wip.map((p) => `
+    <a class="ticket" href="#/project/${p.id}" style="margin-bottom:20px">
+      ${ticketMain(p)}
+      <div class="side">
+        <div class="barcode" aria-hidden="true"></div>
+        <div>
+          <div class="label" style="margin-bottom:6px">Tables in the dataset</div>
+          <ul class="tables">${(p.tables || []).map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
+        </div>
+        <div class="label">${p.sprintsTotal} weekly sprints</div>
+      </div>
+    </a>`).join("");
+  $(".sub-head").hidden = wip.length === 0;
+}
+
+function renderLinks() {
+  const items = [
+    ["LinkedIn", SITE.linkedin],
+    ["GitHub", SITE.githubUser ? `https://github.com/${SITE.githubUser}` : ""],
+    ["Email", SITE.email ? `mailto:${SITE.email}` : ""],
+    ["Instagram", SITE.instagram]
+  ].filter(([, url]) => url);
+  $("#links").innerHTML = items.map(([name, url]) => {
+    const ext = url.startsWith("http");
+    const hint = name === "Email" ? "Write ↗" : "Open ↗";
+    return `<a href="${esc(url)}" ${ext ? 'target="_blank" rel="noopener"' : ""}>${name}<span class="label">${hint}</span></a>`;
+  }).join("");
+  if (SITE.photo) $("#photo").innerHTML = `<img src="${esc(SITE.photo)}" alt="Photo of Balaji Sriramareddy">`;
+  $("#yr").textContent = new Date().getFullYear();
+}
+
+async function openProject(id) {
+  const p = PROJECTS.find((x) => x.id === id);
+  if (!p) return showHome();
+  $("#home").hidden = true; $("#case").hidden = false;
+  $("#c-code").textContent = p.code;
+  const st = $("#c-status");
+  st.className = "chip " + (p.status === "wip" ? "wip" : "live");
+  st.textContent = p.status === "wip" ? "In progress" : "On GitHub";
+  $("#c-title").textContent = p.title;
+  $("#c-cat").textContent = p.category;
+  $("#c-tags").innerHTML = p.tools.map((t) => `<span class="tag">${esc(t)}</span>`).join("");
+  const sprintBox = $("#c-sprints").parentElement;
+  sprintBox.hidden = !p.sprintsTotal;
+  if (p.sprintsTotal) {
+    const done = Number.isInteger(p.sprintsDone) ? p.sprintsDone : 0;
+    $("#c-sprint-label").textContent = Number.isInteger(p.sprintsDone)
+      ? `Sprint ${done} of ${p.sprintsTotal} published` : `${p.sprintsTotal} weekly sprints`;
+    $("#c-sprints").innerHTML = Array.from({ length: p.sprintsTotal }, (_, i) => `<i class="${i < done ? "done" : ""}"></i>`).join("");
+  }
+  $("#c-body").innerHTML = p.body;
+  $("#c-src").textContent = "";
+  const repoUrl = SITE.githubUser && p.repo ? `https://github.com/${SITE.githubUser}/${p.repo}` : "";
+  $("#c-repo").innerHTML = repoUrl ? `<a class="btn" href="${repoUrl}" target="_blank" rel="noopener">View code on GitHub ↗</a>` : "";
+  window.scrollTo(0, 0);
+
+  // When the repo is set, pull the live README so the case study always matches GitHub.
+  if (repoUrl && window.marked) {
+    const base = `https://raw.githubusercontent.com/${SITE.githubUser}/${p.repo}/main/`;
+    try {
+      const res = await fetch(base + "README.md");
+      if (!res.ok) throw new Error(res.status);
+      const md = await res.text();
+      if (location.hash !== `#/project/${p.id}`) return;
+      const box = document.createElement("div");
+      box.innerHTML = marked.parse(md);
+      box.querySelectorAll("img").forEach((img) => {
+        const src = img.getAttribute("src") || "";
+        if (!/^(https?:|data:)/.test(src)) img.src = base + src.replace(/^\.?\//, "");
+      });
+      $("#c-body").replaceChildren(...box.childNodes);
+      $("#c-src").textContent = "Loaded live from the project README on GitHub.";
+    } catch (e) {
+      $("#c-src").textContent = "Showing the summary. The full write-up is on GitHub.";
+    }
+  }
+}
+
+function showHome() { $("#case").hidden = true; $("#home").hidden = false; }
+
+function route() {
+  const m = location.hash.match(/^#\/project\/([\w-]+)/);
+  if (m) return openProject(m[1]);
+  showHome();
+  const target = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
+  if (target) target.scrollIntoView();
+}
+
+$("#back").addEventListener("click", () => { location.hash = "#projects"; });
+window.addEventListener("hashchange", route);
+renderList(); renderLinks(); route();
+</script>
+
+</body>
+</html>
