@@ -356,7 +356,7 @@ const PROJECTS = [
     category: "Customer insight · Churn",
     status: "live",
     summary: "An interactive Excel dashboard on why telecom customers leave, with deep dives by churn reason, plan type, state, tenure and age.",
-    finding: "Competitors are the biggest churn category, and unlimited-plan customers churn more.",
+    finding: "Competitors cause 45% of churn, and light users on unlimited plans churn at nearly three times the rate of capped-plan users.",
     tools: ["Excel", "PivotTables", "Calculated fields"],
     repo: "databel-customer-churn-analysis",
     body: `
@@ -364,10 +364,10 @@ const PROJECTS = [
       <p>Understand what drives customer churn at Databel, a telecom provider, with a particular focus on customers lost to competitors.</p>
       <h2>What I found</h2>
       <ul>
-        <li>Competitors are the highest-contributing churn category.</li>
-        <li>Customers on unlimited plans churn at a higher rate.</li>
-        <li>International-plan churn varies strongly by state.</li>
-        <li>Churn falls as account tenure grows, with differences by contract type.</li>
+        <li>26.9% of 6,687 customers churned. Competitors account for 45% of that, mostly through better offers and better devices.</li>
+        <li>Unlimited-plan customers churn at 32.1% against 16.1% on capped plans. Among customers using under 5 GB it is 34.7% against 12.3%.</li>
+        <li>Month-to-month customers churn at over 70% in every tenure band up to four years. One- and two-year contracts mostly stay under 20%.</li>
+        <li>Seniors churn at 38.5%, against 23.0% for under-30s.</li>
       </ul>
       <h2>How it's built</h2>
       <p>An overview dashboard with total customers, churned customers and churn rate, backed by deep-dive PivotTables and engineered fields such as a churn flag, age groups and usage bands.</p>
@@ -380,21 +380,21 @@ const PROJECTS = [
     category: "Customer insight · End to end",
     status: "live",
     summary: "An end-to-end workflow on retail shopping data, from Python preparation through SQL business queries to a Power BI dashboard.",
-    finding: "Answers which categories drive revenue, which segments are most loyal, and how promotions change buying.",
+    finding: "Subscribers spend no more than non-subscribers ($59.49 vs $59.87), and repeat buyers are no more likely to subscribe.",
     tools: ["Python", "SQL", "Power BI"],
     repo: "customer_behaviour_analysis",
     body: `
       <h2>The business problem</h2>
       <p>Turn raw customer shopping data into business intelligence a commercial team could use.</p>
-      <h2>Questions answered</h2>
+      <h2>What I found</h2>
       <ul>
-        <li>Which categories and items contribute the most revenue?</li>
-        <li>Which segments show higher loyalty and repeat purchases?</li>
-        <li>How does discount and promo usage influence purchase behaviour?</li>
-        <li>What are the common payment and shipping preferences?</li>
+        <li>3,900 purchases worth $233,081. Clothing is 45% of revenue.</li>
+        <li>Men make 68% of purchases, but spend per purchase is about the same for men and women.</li>
+        <li>Subscriptions don't lift spend, and repeat buyers subscribe at the same rate as everyone else.</li>
+        <li>Half of discounted purchases were still above the average order value.</li>
       </ul>
       <h2>How it's built</h2>
-      <p>Python (pandas) for preparation and exploratory analysis, SQL for the business queries, and a Power BI dashboard (<code>customer_behavior_dashboard.pbix</code>) for the results.</p>
+      <p>Python (pandas) for preparation and exploratory analysis, SQL for the business queries, and a Power BI dashboard (<code>customer_behaviour_dashboard.pbix</code>) for the results.</p>
     `
   },
   {
@@ -404,7 +404,7 @@ const PROJECTS = [
     category: "Data quality · Automation",
     status: "live",
     summary: "A back-end “data gatekeeper” that profiles, cleans, validates and scores any dataset before it's used. Built during the CadetX virtual work experience.",
-    finding: "Four modules: profiling, cleaning, rule-based validation with anomaly detection, and pipeline orchestration.",
+    finding: "On a 1,030-row test file it removed 30 duplicate rows, raised the quality score from 87.4 to 96.3 and caught 267 rule violations.",
     tools: ["Python", "Docker"],
     repo: "CadetX-Automated-Data-Cleaning-And-Validation-System",
     body: `
@@ -417,7 +417,7 @@ const PROJECTS = [
         <li><strong>Validation:</strong> rule-based checks plus anomaly detection.</li>
         <li><strong>Pipeline:</strong> orchestrates the modules, with Docker support.</li>
       </ul>
-      <p>Tested on synthetic UK rural fibre-broadband customer records.</p>
+      <p>Tested on synthetic UK rural fibre-broadband customer records, with 89 automated tests and CI on every push.</p>
     `
   },
   {
